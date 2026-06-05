@@ -1,0 +1,2 @@
+https://example.com/page?id=1&type=osago
+https://example.com/search?q=test

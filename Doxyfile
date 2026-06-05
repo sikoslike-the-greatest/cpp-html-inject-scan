@@ -1,0 +1,14 @@
+PROJECT_NAME           = "html-inject-scan"
+PROJECT_BRIEF          = "Automated HTML injection scanner for web applications"
+OUTPUT_DIRECTORY       = docs
+INPUT                  = src
+FILE_PATTERNS          = *.hpp *.cpp
+RECURSIVE              = YES
+EXTRACT_ALL            = YES
+EXTRACT_STATIC         = YES
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+QUIET                  = YES
+WARN_IF_UNDOCUMENTED   = NO
+INPUT_ENCODING         = UTF-8
+OUTPUT_LANGUAGE        = Russian

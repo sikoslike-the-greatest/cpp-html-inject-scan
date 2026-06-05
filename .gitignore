@@ -1,0 +1,8 @@
+build/
+docs/html/
+docs/latex/
+.DS_Store
+*.o
+*.obj
+*.exe
+compile_commands.json
