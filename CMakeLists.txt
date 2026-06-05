@@ -24,11 +24,15 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(cpr)
 
 # Header-only test framework (built by CMake via FetchContent).
+# doctest 2.4.11 declares a CMake minimum older than CMake 4 accepts, so we
+# relax the policy minimum just for its sub-configuration.
+set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
 FetchContent_Declare(
   doctest
   GIT_REPOSITORY https://github.com/doctest/doctest.git
   GIT_TAG v2.4.11)
 FetchContent_MakeAvailable(doctest)
+unset(CMAKE_POLICY_VERSION_MINIMUM)
 
 # Core library: every module lives here so both the executable and the
 # test target build from exactly the same sources.
