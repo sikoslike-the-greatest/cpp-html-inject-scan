@@ -142,7 +142,7 @@ std::string usage_text() {
          "Scan behaviour:\n"
          "      --auto              non-interactive: select all discovered params\n"
          "      --max-url-len <n>   max URL length per batch (default: 2000)\n"
-         "      --threads <n>       scan up to N urls in parallel (needs --auto, default: 1)\n"
+         "      --threads <n>       run up to N checks in parallel (default: 1)\n"
          "  -s, --silent            print only findings\n"
          "  -o, --output <file>     save findings to a TSV file\n"
          "  -h, --help              show this help\n";
