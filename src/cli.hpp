@@ -13,8 +13,8 @@ namespace his {
 
 /// \brief Разобранные параметры запуска приложения.
 struct Options {
-  std::string url_single;     ///< Один целевой URL (-u).
-  std::string url_list_path;  ///< Путь к файлу со списком URL (-l).
+  std::string url_single;                ///< Один целевой URL (-u).
+  std::string url_list_path;             ///< Путь к файлу со списком URL (-l).
   std::string payload = "'\"><zxcasd>";  ///< Подставляемый payload (-p).
   std::string marker = "<zxcasd>";       ///< Маркер для поиска отражения (-m).
   std::string wordlist_path;             ///< Путь к словарю параметров (-w).
@@ -25,14 +25,14 @@ struct Options {
   std::string proxy;                     ///< Прокси (--proxy).
   std::string method = "GET";            ///< HTTP-метод (--method).
   HtmlScanMode mode = HtmlScanMode::Input;  ///< Режим HTML-сканирования (--mode).
-  bool no_html_scan = false;             ///< Не загружать страницу для парсинга name= (--no-html-scan).
-  bool autoselect = false;               ///< Без интерактива: выбрать все (--auto).
-  bool silent = false;                   ///< Тихий режим: только находки (-s).
-  std::size_t max_url_len = 2000;        ///< Лимит длины URL для батча (--max-url-len).
-  std::size_t threads = 1;               ///< Число параллельно сканируемых URL (--threads).
-  long timeout_ms = 15000;               ///< Таймаут запроса, мс (--timeout).
-  std::string output_path;               ///< Файл для сохранения находок (-o).
-  bool show_help = false;                ///< Показать справку (-h).
+  bool no_html_scan = false;       ///< Не загружать страницу для парсинга name= (--no-html-scan).
+  bool autoselect = false;         ///< Без интерактива: выбрать все (--auto).
+  bool silent = false;             ///< Тихий режим: только находки (-s).
+  std::size_t max_url_len = 2000;  ///< Лимит длины URL для батча (--max-url-len).
+  std::size_t threads = 1;         ///< Число параллельно сканируемых URL (--threads).
+  long timeout_ms = 15000;         ///< Таймаут запроса, мс (--timeout).
+  std::string output_path;         ///< Файл для сохранения находок (-o).
+  bool show_help = false;          ///< Показать справку (-h).
 };
 
 /// \brief Разбирает список аргументов (без имени программы) в \ref Options.

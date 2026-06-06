@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>html-inject-scan: Исходный файл src/report.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">html-inject-scan
+   </div>
+   <div id="projectbrief">Automated HTML injection scanner for web applications</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('report_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">report.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="report_8hpp.html">См. документацию.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;iosfwd&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="scanner_8hpp.html">scanner.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacehis.html">his</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span></div>
+<div class="foldopen" id="foldopen00018" data-start="{" data-end="};">
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classhis_1_1_reporter.html">   18</a></span><span class="keyword">class </span><a class="code hl_function" href="classhis_1_1_reporter.html#a73ca7b73eeff023e2e11f9e748cc0b69">Reporter</a> {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <a class="code hl_function" href="classhis_1_1_reporter.html#a73ca7b73eeff023e2e11f9e748cc0b69">Reporter</a>(std::ostream&amp; out, <span class="keywordtype">bool</span> silent, <span class="keywordtype">bool</span> color);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhis_1_1_reporter.html#ab21c324dae711f14783f04ea573c1118">run_info</a>(<span class="keyword">const</span> std::string&amp; payload, <span class="keyword">const</span> std::string&amp; marker, <span class="keyword">const</span> std::string&amp; method,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                std::size_t url_count) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhis_1_1_reporter.html#a0346a93ad798c005070fd5eadee4cc77">scan_header</a>(<span class="keyword">const</span> std::string&amp; url, std::size_t param_count,</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                   <span class="keyword">const</span> std::string&amp; method) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhis_1_1_reporter.html#a1e01f7f933b69f50051326b02d6a5c80">skipped</a>(<span class="keyword">const</span> std::string&amp; url) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhis_1_1_reporter.html#afd65d13cbf65370a0ff2e19a9173bb96">warn</a>(<span class="keyword">const</span> std::string&amp; message) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhis_1_1_reporter.html#ac8d393b6567191245c3ea5fdcffb3b1a">hit</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structhis_1_1_scan_hit.html">ScanHit</a>&amp; <a class="code hl_function" href="classhis_1_1_reporter.html#ac8d393b6567191245c3ea5fdcffb3b1a">hit</a>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classhis_1_1_reporter.html#a268ecdaff80c4766fca86f742977cd9c">summary</a>(std::size_t total_hits) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  std::ostream&amp; out_;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="keywordtype">bool</span> silent_;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordtype">bool</span> color_;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="comment">// Returns the ANSI code when colour is enabled, otherwise an empty string.</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keyword">const</span> <span class="keywordtype">char</span>* paint(<span class="keyword">const</span> <span class="keywordtype">char</span>* code) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>};</div>
+</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespacehis.html#a980fd37403c1ce0fb23dc0ab91fae14a">save_hits_tsv</a>(<span class="keyword">const</span> std::string&amp; path, <span class="keyword">const</span> std::vector&lt;ScanHit&gt;&amp; hits);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>}  <span class="comment">// namespace his</span></div>
+<div class="ttc" id="aclasshis_1_1_reporter_html_a0346a93ad798c005070fd5eadee4cc77"><div class="ttname"><a href="classhis_1_1_reporter.html#a0346a93ad798c005070fd5eadee4cc77">his::Reporter::scan_header</a></div><div class="ttdeci">void scan_header(const std::string &amp;url, std::size_t param_count, const std::string &amp;method) const</div><div class="ttdoc">Печатает заголовок сканирования URL (подавляется в тихом режиме).</div><div class="ttdef"><b>Определения</b> report.cpp:37</div></div>
+<div class="ttc" id="aclasshis_1_1_reporter_html_a1e01f7f933b69f50051326b02d6a5c80"><div class="ttname"><a href="classhis_1_1_reporter.html#a1e01f7f933b69f50051326b02d6a5c80">his::Reporter::skipped</a></div><div class="ttdeci">void skipped(const std::string &amp;url) const</div><div class="ttdoc">Печатает сообщение о пропуске URL (подавляется в тихом режиме).</div><div class="ttdef"><b>Определения</b> report.cpp:45</div></div>
+<div class="ttc" id="aclasshis_1_1_reporter_html_a268ecdaff80c4766fca86f742977cd9c"><div class="ttname"><a href="classhis_1_1_reporter.html#a268ecdaff80c4766fca86f742977cd9c">his::Reporter::summary</a></div><div class="ttdeci">void summary(std::size_t total_hits) const</div><div class="ttdoc">Печатает итоговую сводку (подавляется в тихом режиме).</div><div class="ttdef"><b>Определения</b> report.cpp:61</div></div>
+<div class="ttc" id="aclasshis_1_1_reporter_html_a73ca7b73eeff023e2e11f9e748cc0b69"><div class="ttname"><a href="classhis_1_1_reporter.html#a73ca7b73eeff023e2e11f9e748cc0b69">his::Reporter::Reporter</a></div><div class="ttdeci">Reporter(std::ostream &amp;out, bool silent, bool color)</div><div class="ttdoc">Создаёт репортер.</div><div class="ttdef"><b>Определения</b> report.cpp:20</div></div>
+<div class="ttc" id="aclasshis_1_1_reporter_html_ab21c324dae711f14783f04ea573c1118"><div class="ttname"><a href="classhis_1_1_reporter.html#ab21c324dae711f14783f04ea573c1118">his::Reporter::run_info</a></div><div class="ttdeci">void run_info(const std::string &amp;payload, const std::string &amp;marker, const std::string &amp;method, std::size_t url_count) const</div><div class="ttdoc">Печатает сводную информацию о запуске (подавляется в тихом режиме).</div><div class="ttdef"><b>Определения</b> report.cpp:25</div></div>
+<div class="ttc" id="aclasshis_1_1_reporter_html_ac8d393b6567191245c3ea5fdcffb3b1a"><div class="ttname"><a href="classhis_1_1_reporter.html#ac8d393b6567191245c3ea5fdcffb3b1a">his::Reporter::hit</a></div><div class="ttdeci">void hit(const ScanHit &amp;hit) const</div><div class="ttdoc">Печатает найденную отражённую инъекцию (печатается всегда).</div><div class="ttdef"><b>Определения</b> report.cpp:56</div></div>
+<div class="ttc" id="aclasshis_1_1_reporter_html_afd65d13cbf65370a0ff2e19a9173bb96"><div class="ttname"><a href="classhis_1_1_reporter.html#afd65d13cbf65370a0ff2e19a9173bb96">his::Reporter::warn</a></div><div class="ttdeci">void warn(const std::string &amp;message) const</div><div class="ttdoc">Печатает предупреждение (подавляется в тихом режиме).</div><div class="ttdef"><b>Определения</b> report.cpp:51</div></div>
+<div class="ttc" id="anamespacehis_html"><div class="ttname"><a href="namespacehis.html">his</a></div><div class="ttdef"><b>Определения</b> cli.cpp:6</div></div>
+<div class="ttc" id="anamespacehis_html_a980fd37403c1ce0fb23dc0ab91fae14a"><div class="ttname"><a href="namespacehis.html#a980fd37403c1ce0fb23dc0ab91fae14a">his::save_hits_tsv</a></div><div class="ttdeci">void save_hits_tsv(const std::string &amp;path, const std::vector&lt; ScanHit &gt; &amp;hits)</div><div class="ttdoc">Сохраняет находки в TSV-файл (param \t status \t url).</div><div class="ttdef"><b>Определения</b> report.cpp:71</div></div>
+<div class="ttc" id="ascanner_8hpp_html"><div class="ttname"><a href="scanner_8hpp.html">scanner.hpp</a></div><div class="ttdoc">Подстановка payload, проверка отражения marker, батчинг и bisect.</div></div>
+<div class="ttc" id="astructhis_1_1_scan_hit_html"><div class="ttname"><a href="structhis_1_1_scan_hit.html">his::ScanHit</a></div><div class="ttdoc">Найденная отражённая инъекция (одиночный параметр).</div><div class="ttdef"><b>Определения</b> scanner.hpp:21</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="report_8hpp.html">report.hpp</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

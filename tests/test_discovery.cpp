@@ -16,8 +16,7 @@ TEST_CASE("params_from_url delegates to query parsing") {
 }
 
 TEST_CASE("params_from_html Input mode matches only <input>") {
-  const std::string html =
-      "<input name=\"login\"><meta name=\"csrf\"><input name='pass'>";
+  const std::string html = "<input name=\"login\"><meta name=\"csrf\"><input name='pass'>";
   const auto p = params_from_html(html, HtmlScanMode::Input);
   REQUIRE(p.size() == 2);
   CHECK(p[0] == "login");
@@ -25,8 +24,7 @@ TEST_CASE("params_from_html Input mode matches only <input>") {
 }
 
 TEST_CASE("params_from_html All mode matches any tag and dedups") {
-  const std::string html =
-      "<input name=\"login\"><meta name=\"csrf\"><select name=login>";
+  const std::string html = "<input name=\"login\"><meta name=\"csrf\"><select name=login>";
   const auto p = params_from_html(html, HtmlScanMode::All);
   REQUIRE(p.size() == 2);
   CHECK(p[0] == "login");

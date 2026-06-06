@@ -24,7 +24,7 @@ std::size_t pack_batch(const std::string& base_url, const std::vector<std::strin
   std::size_t count = 1;  // Always include at least one parameter.
   while (start + count < params.size()) {
     const std::vector<std::string> candidate(params.begin() + start,
-                                              params.begin() + start + count + 1);
+                                             params.begin() + start + count + 1);
     if (build_url_with_params(base_url, candidate, payload).size() <= max_url_len) {
       ++count;
     } else {

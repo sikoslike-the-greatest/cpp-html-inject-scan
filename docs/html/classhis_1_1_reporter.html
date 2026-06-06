@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>html-inject-scan: Класс his::Reporter</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">html-inject-scan
+   </div>
+   <div id="projectbrief">Automated HTML injection scanner for web applications</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classhis_1_1_reporter.html','','classhis_1_1_reporter-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Класс his::Reporter</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Формирует вывод сканера в заданный поток.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="report_8hpp_source.html">report.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a73ca7b73eeff023e2e11f9e748cc0b69" id="r_a73ca7b73eeff023e2e11f9e748cc0b69"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a73ca7b73eeff023e2e11f9e748cc0b69">Reporter</a> (std::ostream &amp;out, bool silent, bool color)</td></tr>
+<tr class="memdesc:a73ca7b73eeff023e2e11f9e748cc0b69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создаёт репортер.  <br /></td></tr>
+<tr class="memitem:ab21c324dae711f14783f04ea573c1118" id="r_ab21c324dae711f14783f04ea573c1118"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab21c324dae711f14783f04ea573c1118">run_info</a> (const std::string &amp;payload, const std::string &amp;marker, const std::string &amp;method, std::size_t url_count) const</td></tr>
+<tr class="memdesc:ab21c324dae711f14783f04ea573c1118"><td class="mdescLeft">&#160;</td><td class="mdescRight">Печатает сводную информацию о запуске (подавляется в тихом режиме).  <br /></td></tr>
+<tr class="memitem:a0346a93ad798c005070fd5eadee4cc77" id="r_a0346a93ad798c005070fd5eadee4cc77"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0346a93ad798c005070fd5eadee4cc77">scan_header</a> (const std::string &amp;url, std::size_t param_count, const std::string &amp;method) const</td></tr>
+<tr class="memdesc:a0346a93ad798c005070fd5eadee4cc77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Печатает заголовок сканирования URL (подавляется в тихом режиме).  <br /></td></tr>
+<tr class="memitem:a1e01f7f933b69f50051326b02d6a5c80" id="r_a1e01f7f933b69f50051326b02d6a5c80"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1e01f7f933b69f50051326b02d6a5c80">skipped</a> (const std::string &amp;url) const</td></tr>
+<tr class="memdesc:a1e01f7f933b69f50051326b02d6a5c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Печатает сообщение о пропуске URL (подавляется в тихом режиме).  <br /></td></tr>
+<tr class="memitem:afd65d13cbf65370a0ff2e19a9173bb96" id="r_afd65d13cbf65370a0ff2e19a9173bb96"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afd65d13cbf65370a0ff2e19a9173bb96">warn</a> (const std::string &amp;message) const</td></tr>
+<tr class="memdesc:afd65d13cbf65370a0ff2e19a9173bb96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Печатает предупреждение (подавляется в тихом режиме).  <br /></td></tr>
+<tr class="memitem:ac8d393b6567191245c3ea5fdcffb3b1a" id="r_ac8d393b6567191245c3ea5fdcffb3b1a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac8d393b6567191245c3ea5fdcffb3b1a">hit</a> (const <a class="el" href="structhis_1_1_scan_hit.html">ScanHit</a> &amp;hit) const</td></tr>
+<tr class="memdesc:ac8d393b6567191245c3ea5fdcffb3b1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Печатает найденную отражённую инъекцию (печатается всегда).  <br /></td></tr>
+<tr class="memitem:a268ecdaff80c4766fca86f742977cd9c" id="r_a268ecdaff80c4766fca86f742977cd9c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a268ecdaff80c4766fca86f742977cd9c">summary</a> (std::size_t total_hits) const</td></tr>
+<tr class="memdesc:a268ecdaff80c4766fca86f742977cd9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Печатает итоговую сводку (подавляется в тихом режиме).  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Формирует вывод сканера в заданный поток. </p>
+<p>Инкапсулирует ANSI-оформление и режимы вывода. В тихом режиме печатаются только находки и итоговая сводка, без прогресса и заголовков. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
+<a id="a73ca7b73eeff023e2e11f9e748cc0b69" name="a73ca7b73eeff023e2e11f9e748cc0b69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73ca7b73eeff023e2e11f9e748cc0b69">&#9670;&#160;</a></span>Reporter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">his::Reporter::Reporter </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;</td>          <td class="paramname"><span class="paramname"><em>out</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>silent</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>color</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Создаёт репортер. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>Поток вывода. </td></tr>
+    <tr><td class="paramname">silent</td><td>Тихий режим (только находки). </td></tr>
+    <tr><td class="paramname">color</td><td>Использовать ANSI-цвета. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
+<a id="ac8d393b6567191245c3ea5fdcffb3b1a" name="ac8d393b6567191245c3ea5fdcffb3b1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8d393b6567191245c3ea5fdcffb3b1a">&#9670;&#160;</a></span>hit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void his::Reporter::hit </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structhis_1_1_scan_hit.html">ScanHit</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>hit</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Печатает найденную отражённую инъекцию (печатается всегда). </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="#ac8d393b6567191245c3ea5fdcffb3b1a" title="Печатает найденную отражённую инъекцию (печатается всегда).">hit</a></td><td>Найденная инъекция. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab21c324dae711f14783f04ea573c1118" name="ab21c324dae711f14783f04ea573c1118"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab21c324dae711f14783f04ea573c1118">&#9670;&#160;</a></span>run_info()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void his::Reporter::run_info </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>payload</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>marker</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>method</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t</td>          <td class="paramname"><span class="paramname"><em>url_count</em></span>&#160;) const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Печатает сводную информацию о запуске (подавляется в тихом режиме). </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">payload</td><td>Используемый payload. </td></tr>
+    <tr><td class="paramname">marker</td><td>Маркер отражения. </td></tr>
+    <tr><td class="paramname">method</td><td>HTTP-метод. </td></tr>
+    <tr><td class="paramname">url_count</td><td>Количество целевых URL. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0346a93ad798c005070fd5eadee4cc77" name="a0346a93ad798c005070fd5eadee4cc77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0346a93ad798c005070fd5eadee4cc77">&#9670;&#160;</a></span>scan_header()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void his::Reporter::scan_header </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>url</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t</td>          <td class="paramname"><span class="paramname"><em>param_count</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>method</em></span>&#160;) const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Печатает заголовок сканирования URL (подавляется в тихом режиме). </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">url</td><td>Сканируемый URL. </td></tr>
+    <tr><td class="paramname">param_count</td><td>Количество выбранных параметров. </td></tr>
+    <tr><td class="paramname">method</td><td>HTTP-метод. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1e01f7f933b69f50051326b02d6a5c80" name="a1e01f7f933b69f50051326b02d6a5c80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e01f7f933b69f50051326b02d6a5c80">&#9670;&#160;</a></span>skipped()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void his::Reporter::skipped </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>url</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Печатает сообщение о пропуске URL (подавляется в тихом режиме). </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">url</td><td>Пропущенный URL. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a268ecdaff80c4766fca86f742977cd9c" name="a268ecdaff80c4766fca86f742977cd9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a268ecdaff80c4766fca86f742977cd9c">&#9670;&#160;</a></span>summary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void his::Reporter::summary </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t</td>          <td class="paramname"><span class="paramname"><em>total_hits</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Печатает итоговую сводку (подавляется в тихом режиме). </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">total_hits</td><td>Общее число находок. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="afd65d13cbf65370a0ff2e19a9173bb96" name="afd65d13cbf65370a0ff2e19a9173bb96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd65d13cbf65370a0ff2e19a9173bb96">&#9670;&#160;</a></span>warn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void his::Reporter::warn </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Печатает предупреждение (подавляется в тихом режиме). </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>Текст предупреждения. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>src/<a class="el" href="report_8hpp_source.html">report.hpp</a></li>
+<li>src/<a class="el" href="report_8cpp.html">report.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacehis.html">his</a></li><li class="navelem"><a href="classhis_1_1_reporter.html">Reporter</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

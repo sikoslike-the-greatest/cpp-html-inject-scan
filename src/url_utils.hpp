@@ -76,8 +76,7 @@ std::vector<std::string> extract_query_params(const std::string& url);
 /// \param params Имена параметров, в которые подставляется значение.
 /// \param value Значение (payload), общее для всех указанных параметров.
 /// \return Готовый URL с подставленным значением.
-std::string build_url_with_params(const std::string& url,
-                                   const std::vector<std::string>& params,
-                                   const std::string& value);
+std::string build_url_with_params(const std::string& url, const std::vector<std::string>& params,
+                                  const std::string& value);
 
 }  // namespace his

@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>html-inject-scan: Файл src/selector.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">html-inject-scan
+   </div>
+   <div id="projectbrief">Automated HTML injection scanner for web applications</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('selector_8cpp.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Файл selector.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="selector_8hpp_source.html">selector.hpp</a>&quot;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;charconv&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;optional&gt;</code><br />
+<code>#include &lt;set&gt;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Пространства имен</h2></td></tr>
+<tr class="memitem:his" id="r_his"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacehis.html">his</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:ad2e6a048aff5c997517f32b97057c407" id="r_ad2e6a048aff5c997517f32b97057c407"><td class="memItemLeft">std::vector&lt; std::size_t &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacehis.html#ad2e6a048aff5c997517f32b97057c407">his::parse_selection</a> (const std::string &amp;choice, std::size_t count)</td></tr>
+<tr class="memdesc:ad2e6a048aff5c997517f32b97057c407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Разбирает строку выбора в набор индексов.  <br /></td></tr>
+<tr class="memitem:a3c04acbbf66ddbc4ba5e0f9d000649fd" id="r_a3c04acbbf66ddbc4ba5e0f9d000649fd"><td class="memItemLeft">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacehis.html#a3c04acbbf66ddbc4ba5e0f9d000649fd">his::select_by_indices</a> (const std::vector&lt; std::string &gt; &amp;items, const std::vector&lt; std::size_t &gt; &amp;indices)</td></tr>
+<tr class="memdesc:a3c04acbbf66ddbc4ba5e0f9d000649fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Возвращает элементы по списку индексов.  <br /></td></tr>
+<tr class="memitem:aeaca557d756d1a76ed0e59200b7af741" id="r_aeaca557d756d1a76ed0e59200b7af741"><td class="memItemLeft">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacehis.html#aeaca557d756d1a76ed0e59200b7af741">his::interactive_select</a> (const std::vector&lt; std::string &gt; &amp;params, const std::string &amp;source_label, std::istream &amp;in, std::ostream &amp;out)</td></tr>
+<tr class="memdesc:aeaca557d756d1a76ed0e59200b7af741"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерактивно выводит список параметров и читает выбор из потока.  <br /></td></tr>
+<tr class="memitem:ae223f262f7788c0d5fddd88c195b7ac5" id="r_ae223f262f7788c0d5fddd88c195b7ac5"><td class="memItemLeft">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacehis.html#ae223f262f7788c0d5fddd88c195b7ac5">his::interactive_select</a> (const std::vector&lt; std::string &gt; &amp;params, const std::string &amp;source_label)</td></tr>
+<tr class="memdesc:ae223f262f7788c0d5fddd88c195b7ac5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Интерактивный выбор через стандартные потоки ввода-вывода.  <br /></td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="selector_8cpp.html">selector.cpp</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -60,7 +60,7 @@ TEST_CASE("Reporter non-silent prints run info and summary") {
 TEST_CASE("save_hits_tsv writes tab-separated rows") {
   const std::string path = "tmp_hits_test.tsv";
   const std::vector<ScanHit> hits{make_hit("q", 200, "http://a/?q=x"),
-                                   make_hit("id", 302, "http://a/?id=x")};
+                                  make_hit("id", 302, "http://a/?id=x")};
   save_hits_tsv(path, hits);
 
   std::ifstream in(path);

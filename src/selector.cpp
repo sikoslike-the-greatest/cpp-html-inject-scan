@@ -89,8 +89,8 @@ std::vector<std::string> select_by_indices(const std::vector<std::string>& items
 }
 
 std::vector<std::string> interactive_select(const std::vector<std::string>& params,
-                                             const std::string& source_label, std::istream& in,
-                                             std::ostream& out) {
+                                            const std::string& source_label, std::istream& in,
+                                            std::ostream& out) {
   if (params.empty()) return {};
 
   out << "\n[" << source_label << "] Found " << params.size() << " params:\n";
@@ -105,7 +105,7 @@ std::vector<std::string> interactive_select(const std::vector<std::string>& para
 }
 
 std::vector<std::string> interactive_select(const std::vector<std::string>& params,
-                                             const std::string& source_label) {
+                                            const std::string& source_label) {
   return interactive_select(params, source_label, std::cin, std::cout);
 }
 

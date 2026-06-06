@@ -27,10 +27,10 @@ struct ScanHit {
 
 /// \brief Результат одной пробы (запроса для набора параметров).
 struct ProbeResult {
-  std::string url;       ///< Отправленный URL.
-  long status = 0;       ///< HTTP статус ответа.
+  std::string url;         ///< Отправленный URL.
+  long status = 0;         ///< HTTP статус ответа.
   bool reflected = false;  ///< true, если marker найден в теле.
-  std::size_t length{};  ///< Длина тела ответа.
+  std::size_t length{};    ///< Длина тела ответа.
 };
 
 /// \brief Проверяет, содержится ли marker в теле ответа.

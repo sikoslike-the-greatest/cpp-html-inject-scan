@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>html-inject-scan: Структура his::ProbeResult</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">html-inject-scan
+   </div>
+   <div id="projectbrief">Automated HTML injection scanner for web applications</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structhis_1_1_probe_result.html','','structhis_1_1_probe_result-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Структура his::ProbeResult</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Результат одной пробы (запроса для набора параметров).  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="scanner_8hpp_source.html">scanner.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Открытые атрибуты</h2></td></tr>
+<tr class="memitem:a556ca13dc292ea4ca1446ba7555340c1" id="r_a556ca13dc292ea4ca1446ba7555340c1"><td class="memItemLeft">std::string&#160;</td><td class="memItemRight"><a class="el" href="#a556ca13dc292ea4ca1446ba7555340c1">url</a></td></tr>
+<tr class="memdesc:a556ca13dc292ea4ca1446ba7555340c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Отправленный URL.  <br /></td></tr>
+<tr class="memitem:a421bd83f4309d90650cc9b472c1b1779" id="r_a421bd83f4309d90650cc9b472c1b1779"><td class="memItemLeft">long&#160;</td><td class="memItemRight"><a class="el" href="#a421bd83f4309d90650cc9b472c1b1779">status</a> = 0</td></tr>
+<tr class="memdesc:a421bd83f4309d90650cc9b472c1b1779"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP статус ответа.  <br /></td></tr>
+<tr class="memitem:a91ed325d4b511db451e5b0f93d005715" id="r_a91ed325d4b511db451e5b0f93d005715"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a91ed325d4b511db451e5b0f93d005715">reflected</a> = false</td></tr>
+<tr class="memdesc:a91ed325d4b511db451e5b0f93d005715"><td class="mdescLeft">&#160;</td><td class="mdescRight">true, если marker найден в теле.  <br /></td></tr>
+<tr class="memitem:a6ff8e44a321b921660cd6c005885632a" id="r_a6ff8e44a321b921660cd6c005885632a"><td class="memItemLeft">std::size_t&#160;</td><td class="memItemRight"><a class="el" href="#a6ff8e44a321b921660cd6c005885632a">length</a> {}</td></tr>
+<tr class="memdesc:a6ff8e44a321b921660cd6c005885632a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Длина тела ответа.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Результат одной пробы (запроса для набора параметров). </p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Данные класса</h2>
+<a id="a6ff8e44a321b921660cd6c005885632a" name="a6ff8e44a321b921660cd6c005885632a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ff8e44a321b921660cd6c005885632a">&#9670;&#160;</a></span>length</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t his::ProbeResult::length {}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Длина тела ответа. </p>
+
+</div>
+</div>
+<a id="a91ed325d4b511db451e5b0f93d005715" name="a91ed325d4b511db451e5b0f93d005715"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91ed325d4b511db451e5b0f93d005715">&#9670;&#160;</a></span>reflected</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool his::ProbeResult::reflected = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>true, если marker найден в теле. </p>
+
+</div>
+</div>
+<a id="a421bd83f4309d90650cc9b472c1b1779" name="a421bd83f4309d90650cc9b472c1b1779"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a421bd83f4309d90650cc9b472c1b1779">&#9670;&#160;</a></span>status</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long his::ProbeResult::status = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>HTTP статус ответа. </p>
+
+</div>
+</div>
+<a id="a556ca13dc292ea4ca1446ba7555340c1" name="a556ca13dc292ea4ca1446ba7555340c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a556ca13dc292ea4ca1446ba7555340c1">&#9670;&#160;</a></span>url</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string his::ProbeResult::url</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Отправленный URL. </p>
+
+</div>
+</div>
+<hr/>Объявления и описания членов структуры находятся в файле:<ul>
+<li>src/<a class="el" href="scanner_8hpp_source.html">scanner.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacehis.html">his</a></li><li class="navelem"><a href="structhis_1_1_probe_result.html">ProbeResult</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

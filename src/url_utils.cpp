@@ -146,8 +146,7 @@ std::vector<std::string> extract_query_params(const std::string& url) {
   return names;
 }
 
-std::string build_url_with_params(const std::string& url,
-                                  const std::vector<std::string>& params,
+std::string build_url_with_params(const std::string& url, const std::vector<std::string>& params,
                                   const std::string& value) {
   ParsedUrl parsed = parse_url(url);
   QueryParams pairs = parse_query(parsed.query);
