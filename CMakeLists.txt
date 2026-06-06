@@ -16,6 +16,15 @@ endif()
 
 option(HIS_BUILD_TESTS "Build unit tests (requires doctest)" ON)
 
+# Build a self-contained executable: link cpr/curl/zlib and our own library
+# statically so the released binary has no external .dylib/.so dependencies.
+set(BUILD_SHARED_LIBS OFF)
+
+# Disable nghttp2/HTTP2 in the bundled curl: otherwise the binary picks up a
+# non-system libnghttp2.dylib and fails to run on other machines. HTTP/1.1 is
+# sufficient for reflection scanning.
+set(USE_NGHTTP2 OFF CACHE BOOL "" FORCE)
+
 find_package(Threads REQUIRED)
 
 include(FetchContent)
@@ -43,7 +52,7 @@ endif()
 # Core library: every module lives here so both the executable and the
 # test target build from exactly the same sources.
 add_library(
-  scanner_lib
+  scanner_lib STATIC
   src/version.cpp
   src/url_utils.cpp
   src/http_client.cpp
