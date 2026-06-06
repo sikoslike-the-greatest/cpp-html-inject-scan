@@ -29,7 +29,7 @@ struct Options {
   bool autoselect = false;         ///< Без интерактива: выбрать все (--auto).
   bool silent = false;             ///< Тихий режим: только находки (-s).
   std::size_t max_url_len = 2000;  ///< Лимит длины URL для батча (--max-url-len).
-  std::size_t threads = 1;         ///< Число параллельно сканируемых URL (--threads).
+  std::size_t threads = 1;         ///< Число параллельных проверок (--threads).
   long timeout_ms = 15000;         ///< Таймаут запроса, мс (--timeout).
   std::string output_path;         ///< Файл для сохранения находок (-o).
   bool show_help = false;          ///< Показать справку (-h).

@@ -77,16 +77,54 @@ std::vector<std::string> find_reflected(const std::string& base_url,
                                         const std::string& payload, const std::string& marker,
                                         const ResponseFn& send);
 
+/// \brief Разбивает параметры на батчи под лимит длины URL.
+///
+/// Каждый батч не превышает \p max_url_len после кодирования. При
+/// \p concurrency > 1 размер батча дополнительно ограничивается так, чтобы
+/// получилось примерно \p concurrency батчей — это даёт работу всем потокам
+/// (ценой большего числа запросов). При \p concurrency == 1 батчи максимально
+/// крупные (минимум запросов).
+/// \param base_url Базовый URL.
+/// \param params Параметры для тестирования.
+/// \param payload Подставляемое значение (учитывается его длина после кодирования).
+/// \param max_url_len Максимальная длина URL для батча.
+/// \param concurrency Планируемое число потоков (>=1).
+/// \return Список батчей (каждый — набор имён параметров) в исходном порядке.
+std::vector<std::vector<std::string>> build_batches(const std::string& base_url,
+                                                    const std::vector<std::string>& params,
+                                                    const std::string& payload,
+                                                    std::size_t max_url_len,
+                                                    std::size_t concurrency = 1);
+
+/// \brief Обрабатывает один батч: проба, при отражении — bisect и подтверждение.
+///
+/// Самодостаточная единица работы: не делит состояние с другими батчами,
+/// поэтому батчи можно обрабатывать параллельно.
+/// \param base_url Базовый URL.
+/// \param batch Параметры батча.
+/// \param payload Подставляемое значение.
+/// \param marker Подстрока для поиска отражения.
+/// \param send Функция отправки запроса.
+/// \return Найденные отражённые инъекции этого батча.
+std::vector<ScanHit> scan_batch(const std::string& base_url, const std::vector<std::string>& batch,
+                                const std::string& payload, const std::string& marker,
+                                const ResponseFn& send);
+
 /// \brief Сканирует URL: батчит параметры под лимит длины и выделяет отражающие.
+///
+/// При \p concurrency > 1 батчи обрабатываются параллельно (порядок результатов
+/// сохраняется).
 /// \param base_url Базовый URL.
 /// \param params Параметры для тестирования.
 /// \param payload Подставляемое значение.
 /// \param marker Подстрока для поиска отражения.
 /// \param max_url_len Максимальная длина URL для батча.
 /// \param send Функция отправки запроса.
+/// \param concurrency Число одновременно обрабатываемых батчей (>=1).
 /// \return Список найденных отражённых инъекций.
 std::vector<ScanHit> scan_url(const std::string& base_url, const std::vector<std::string>& params,
                               const std::string& payload, const std::string& marker,
-                              std::size_t max_url_len, const ResponseFn& send);
+                              std::size_t max_url_len, const ResponseFn& send,
+                              std::size_t concurrency = 1);
 
 }  // namespace his

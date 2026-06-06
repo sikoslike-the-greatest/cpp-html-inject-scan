@@ -1,5 +1,8 @@
 #include "scanner.hpp"
 
+#include <algorithm>
+
+#include "parallel.hpp"
 #include "url_utils.hpp"
 
 namespace his {
@@ -62,27 +65,71 @@ std::vector<std::string> find_reflected(const std::string& base_url,
   return found;
 }
 
+std::vector<std::vector<std::string>> build_batches(const std::string& base_url,
+                                                    const std::vector<std::string>& params,
+                                                    const std::string& payload,
+                                                    std::size_t max_url_len,
+                                                    std::size_t concurrency) {
+  std::vector<std::vector<std::string>> batches;
+  const std::size_t n = params.size();
+  if (concurrency < 1) concurrency = 1;
+
+  // With one thread, pack as many params as fit (fewest requests). With more
+  // threads, cap the batch size so the work spreads across ~concurrency batches.
+  std::size_t target = n;
+  if (concurrency > 1 && n > 0) target = (n + concurrency - 1) / concurrency;
+
+  std::size_t i = 0;
+  while (i < n) {
+    std::size_t size = pack_batch(base_url, params, i, payload, max_url_len);
+    if (target > 0) size = std::min(size, target);
+    if (size < 1) size = 1;
+    batches.emplace_back(params.begin() + i, params.begin() + i + size);
+    i += size;
+  }
+  return batches;
+}
+
+std::vector<ScanHit> scan_batch(const std::string& base_url, const std::vector<std::string>& batch,
+                                const std::string& payload, const std::string& marker,
+                                const ResponseFn& send) {
+  std::vector<ScanHit> hits;
+  if (batch.empty()) return hits;
+
+  const ProbeResult pr = probe(base_url, batch, payload, marker, send);
+  if (!pr.reflected) return hits;
+
+  if (batch.size() == 1) {
+    hits.push_back({batch[0], pr.url, pr.status, pr.length});
+    return hits;
+  }
+  for (const auto& param : find_reflected(base_url, batch, payload, marker, send)) {
+    const ProbeResult confirm = probe(base_url, {param}, payload, marker, send);
+    hits.push_back({param, confirm.url, confirm.status, confirm.length});
+  }
+  return hits;
+}
+
 std::vector<ScanHit> scan_url(const std::string& base_url, const std::vector<std::string>& params,
                               const std::string& payload, const std::string& marker,
-                              std::size_t max_url_len, const ResponseFn& send) {
+                              std::size_t max_url_len, const ResponseFn& send,
+                              std::size_t concurrency) {
+  const auto batches = build_batches(base_url, params, payload, max_url_len, concurrency);
   std::vector<ScanHit> hits;
-  std::size_t i = 0;
-  while (i < params.size()) {
-    const std::size_t n = pack_batch(base_url, params, i, payload, max_url_len);
-    const std::vector<std::string> batch(params.begin() + i, params.begin() + i + n);
 
-    const ProbeResult pr = probe(base_url, batch, payload, marker, send);
-    if (pr.reflected) {
-      if (n == 1) {
-        hits.push_back({batch[0], pr.url, pr.status, pr.length});
-      } else {
-        for (const auto& param : find_reflected(base_url, batch, payload, marker, send)) {
-          const ProbeResult confirm = probe(base_url, {param}, payload, marker, send);
-          hits.push_back({param, confirm.url, confirm.status, confirm.length});
-        }
-      }
+  if (concurrency > 1 && batches.size() > 1) {
+    const auto per_batch = parallel_map(
+        batches,
+        [&](const std::vector<std::string>& b) {
+          return scan_batch(base_url, b, payload, marker, send);
+        },
+        concurrency);
+    for (const auto& v : per_batch) hits.insert(hits.end(), v.begin(), v.end());
+  } else {
+    for (const auto& b : batches) {
+      const auto v = scan_batch(base_url, b, payload, marker, send);
+      hits.insert(hits.end(), v.begin(), v.end());
     }
-    i += n;
   }
   return hits;
 }

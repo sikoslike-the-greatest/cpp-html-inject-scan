@@ -93,3 +93,21 @@ TEST_CASE("scan_url works across multiple batches with a small limit") {
   REQUIRE(hits.size() == 1);
   CHECK(hits[0].param == "coupon");
 }
+
+TEST_CASE("build_batches splits work across threads but caps URL length") {
+  const std::vector<std::string> params{"a", "b", "c", "d", "e", "f", "g", "h"};
+  // One thread: a single large batch (fewest requests).
+  CHECK(build_batches("https://e.com/p", params, kPayload, 4000, 1).size() == 1);
+  // Four threads: roughly four batches so every thread gets work.
+  CHECK(build_batches("https://e.com/p", params, kPayload, 4000, 4).size() == 4);
+}
+
+TEST_CASE("parallel scan_url matches sequential results") {
+  const std::vector<std::string> params{"a", "b", "c", "d", "e", "f", "g", "h"};
+  const auto server = make_server({"b", "g"});
+  const auto seq = scan_url("https://e.com/p", params, kPayload, kMarker, 4000, server, 1);
+  const auto par = scan_url("https://e.com/p", params, kPayload, kMarker, 4000, server, 4);
+  REQUIRE(par.size() == seq.size());
+  CHECK(contains(par, "b"));
+  CHECK(contains(par, "g"));
+}

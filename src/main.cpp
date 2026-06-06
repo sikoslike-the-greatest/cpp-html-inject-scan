@@ -1,5 +1,6 @@
 #include <unistd.h>
 
+#include <cstddef>
 #include <iostream>
 #include <string>
 #include <utility>
@@ -113,20 +114,13 @@ std::vector<std::string> select_params(
   return his::dedup_preserve_order(merged);
 }
 
-UrlScanResult scan_one(const Session& session, const his::ResponseFn& sender,
-                       const std::string& url, const Options& opt) {
-  UrlScanResult res;
-  res.url = url;
-  const auto sources = gather_sources(session, url, opt, res.warnings);
-  const auto selected = select_params(sources, opt);
-  res.param_count = selected.size();
-  if (selected.empty()) {
-    res.skipped = true;
-    return res;
-  }
-  res.hits = his::scan_url(url, selected, opt.payload, opt.marker, opt.max_url_len, sender);
-  return res;
-}
+// One independent unit of checking work: a single batch of parameters tied to
+// the URL it belongs to. Collecting all jobs across all URLs lets a single
+// bounded thread pool parallelize every check, not just whole URLs.
+struct BatchJob {
+  std::size_t url_index = 0;
+  std::vector<std::string> batch;
+};
 
 void run(const Options& opt) {
   const Session session = build_session(opt);
@@ -137,15 +131,44 @@ void run(const Options& opt) {
   const his::Reporter reporter(std::cout, opt.silent, color);
   reporter.run_info(opt.payload, opt.marker, opt.method, urls.size());
 
-  const auto worker = [&](const std::string& url) { return scan_one(session, sender, url, opt); };
+  // Phase 1: discovery + parameter selection per URL. Kept sequential because
+  // selection may be interactive (reads stdin).
+  std::vector<UrlScanResult> results(urls.size());
+  std::vector<std::vector<std::string>> selected_per_url(urls.size());
+  for (std::size_t u = 0; u < urls.size(); ++u) {
+    results[u].url = urls[u];
+    const auto sources = gather_sources(session, urls[u], opt, results[u].warnings);
+    auto selected = select_params(sources, opt);
+    results[u].param_count = selected.size();
+    if (selected.empty()) results[u].skipped = true;
+    selected_per_url[u] = std::move(selected);
+  }
 
-  std::vector<UrlScanResult> results;
-  // Parallel scanning is only safe without interactive selection (stdin).
-  if (opt.threads > 1 && opt.autoselect) {
-    results = his::parallel_map(urls, worker, opt.threads);
+  // Phase 2: flatten every URL's batches into one global job list.
+  std::vector<BatchJob> jobs;
+  for (std::size_t u = 0; u < urls.size(); ++u) {
+    if (results[u].skipped) continue;
+    auto batches =
+        his::build_batches(urls[u], selected_per_url[u], opt.payload, opt.max_url_len, opt.threads);
+    for (auto& b : batches) jobs.push_back({u, std::move(b)});
+  }
+
+  // Phase 3: run all checks through one bounded thread pool.
+  const auto run_job = [&](const BatchJob& j) {
+    return his::scan_batch(urls[j.url_index], j.batch, opt.payload, opt.marker, sender);
+  };
+  std::vector<std::vector<ScanHit>> job_hits;
+  if (opt.threads > 1 && jobs.size() > 1) {
+    job_hits = his::parallel_map(jobs, run_job, opt.threads);
   } else {
-    results.reserve(urls.size());
-    for (const auto& url : urls) results.push_back(worker(url));
+    job_hits.reserve(jobs.size());
+    for (const auto& j : jobs) job_hits.push_back(run_job(j));
+  }
+
+  // Phase 4: regroup hits back to their URL, preserving parameter order.
+  for (std::size_t k = 0; k < jobs.size(); ++k) {
+    auto& dst = results[jobs[k].url_index].hits;
+    dst.insert(dst.end(), job_hits[k].begin(), job_hits[k].end());
   }
 
   std::vector<ScanHit> all_hits;
