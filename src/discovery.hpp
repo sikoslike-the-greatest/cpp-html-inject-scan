@@ -10,7 +10,7 @@ namespace his {
 
 /// \brief Режим извлечения параметров из HTML.
 enum class HtmlScanMode {
-  Input,  ///< Только атрибуты name= у тегов <input>.
+  Input,  ///< Только атрибуты name= у тегов \<input\>.
   All,    ///< Атрибуты name= у любых тегов.
 };
 
@@ -23,7 +23,7 @@ std::vector<std::string> params_from_url(const std::string& url);
 
 /// \brief Извлекает имена параметров из HTML по атрибутам name=.
 ///
-/// В режиме \ref HtmlScanMode::Input учитываются только теги <input>,
+/// В режиме \ref HtmlScanMode::Input учитываются только теги \<input\>,
 /// в режиме \ref HtmlScanMode::All — любые теги с атрибутом name=.
 /// \param html Текст HTML-страницы.
 /// \param mode Режим сканирования.

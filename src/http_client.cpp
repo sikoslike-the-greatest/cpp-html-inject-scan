@@ -22,8 +22,7 @@ const char* kDefaultUserAgent =
 
 // Applies the shared configuration onto a cpr::Session. cpr::Session is
 // non-movable, so it is configured in place rather than returned by value.
-void configure_session(cpr::Session& session, const std::string& url,
-                       const std::string& user_agent,
+void configure_session(cpr::Session& session, const std::string& url, const std::string& user_agent,
                        const std::vector<std::pair<std::string, std::string>>& headers,
                        const std::vector<std::pair<std::string, std::string>>& cookies,
                        const std::string& proxy, long timeout_ms, bool verify_ssl) {

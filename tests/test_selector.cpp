@@ -12,9 +12,7 @@ TEST_CASE("parse_selection 'a' and empty select all") {
   CHECK(parse_selection("  A ", 2) == std::vector<std::size_t>{0, 1});
 }
 
-TEST_CASE("parse_selection 'n' selects none") {
-  CHECK(parse_selection("n", 5).empty());
-}
+TEST_CASE("parse_selection 'n' selects none") { CHECK(parse_selection("n", 5).empty()); }
 
 TEST_CASE("parse_selection handles single indices and ranges") {
   CHECK(parse_selection("0,2", 5) == std::vector<std::size_t>{0, 2});

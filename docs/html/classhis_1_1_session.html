@@ -1,0 +1,419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>html-inject-scan: Класс his::Session</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">html-inject-scan
+   </div>
+   <div id="projectbrief">Automated HTML injection scanner for web applications</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classhis_1_1_session.html','','classhis_1_1_session-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Загрузка...</div>
+<div class="SRStatus" id="Searching">Поиск...</div>
+<div class="SRStatus" id="NoMatches">Не найдено</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Класс his::Session</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>HTTP-сессия: хранит общие для запросов настройки и выполняет GET/POST.  
+ <a href="#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="http__client_8hpp_source.html">http_client.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a8f65afdf40b379590975a62f3d4fd9ed" id="r_a8f65afdf40b379590975a62f3d4fd9ed"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8f65afdf40b379590975a62f3d4fd9ed">Session</a> ()</td></tr>
+<tr class="memdesc:a8f65afdf40b379590975a62f3d4fd9ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создаёт сессию с браузерным User-Agent и отключённой проверкой TLS.  <br /></td></tr>
+<tr class="memitem:a275a239c829dde41d352e0f76ff615a9" id="r_a275a239c829dde41d352e0f76ff615a9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a275a239c829dde41d352e0f76ff615a9">set_user_agent</a> (const std::string &amp;ua)</td></tr>
+<tr class="memdesc:a275a239c829dde41d352e0f76ff615a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Устанавливает строку User-Agent.  <br /></td></tr>
+<tr class="memitem:a25201c7fc5730bdfb1fc90fa3c1b4d9c" id="r_a25201c7fc5730bdfb1fc90fa3c1b4d9c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a25201c7fc5730bdfb1fc90fa3c1b4d9c">add_header</a> (const std::string &amp;name, const std::string &amp;value)</td></tr>
+<tr class="memdesc:a25201c7fc5730bdfb1fc90fa3c1b4d9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет/перезаписывает заголовок.  <br /></td></tr>
+<tr class="memitem:a125eb7a6d5445a52d3da9ae5ca807d8c" id="r_a125eb7a6d5445a52d3da9ae5ca807d8c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a125eb7a6d5445a52d3da9ae5ca807d8c">add_header_line</a> (const std::string &amp;line)</td></tr>
+<tr class="memdesc:a125eb7a6d5445a52d3da9ae5ca807d8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляет заголовок из строки "Name: value".  <br /></td></tr>
+<tr class="memitem:a045a1cd3de02c7b4b985b7e5a36d331b" id="r_a045a1cd3de02c7b4b985b7e5a36d331b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a045a1cd3de02c7b4b985b7e5a36d331b">set_cookies</a> (const std::string &amp;cookie_str)</td></tr>
+<tr class="memdesc:a045a1cd3de02c7b4b985b7e5a36d331b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Задаёт cookie из строки "k=v; k2=v2".  <br /></td></tr>
+<tr class="memitem:ade0e2bf7e781daea4a654aec74df7d32" id="r_ade0e2bf7e781daea4a654aec74df7d32"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ade0e2bf7e781daea4a654aec74df7d32">set_proxy</a> (const std::string &amp;proxy)</td></tr>
+<tr class="memdesc:ade0e2bf7e781daea4a654aec74df7d32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Задаёт HTTP/HTTPS прокси.  <br /></td></tr>
+<tr class="memitem:a64b0f5f99133663ab3a431a271b8c760" id="r_a64b0f5f99133663ab3a431a271b8c760"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a64b0f5f99133663ab3a431a271b8c760">set_timeout_ms</a> (long ms)</td></tr>
+<tr class="memdesc:a64b0f5f99133663ab3a431a271b8c760"><td class="mdescLeft">&#160;</td><td class="mdescRight">Задаёт таймаут запроса в миллисекундах.  <br /></td></tr>
+<tr class="memitem:abe4df2771cf2be677379ed3461547eba" id="r_abe4df2771cf2be677379ed3461547eba"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abe4df2771cf2be677379ed3461547eba">set_verify_ssl</a> (bool verify)</td></tr>
+<tr class="memdesc:abe4df2771cf2be677379ed3461547eba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Включает/выключает проверку TLS-сертификата.  <br /></td></tr>
+<tr class="memitem:a974dc22c9df7d62735ead7efb6a498fc" id="r_a974dc22c9df7d62735ead7efb6a498fc"><td class="memItemLeft"><a class="el" href="structhis_1_1_http_response.html">HttpResponse</a>&#160;</td><td class="memItemRight"><a class="el" href="#a974dc22c9df7d62735ead7efb6a498fc">get</a> (const std::string &amp;url) const</td></tr>
+<tr class="memdesc:a974dc22c9df7d62735ead7efb6a498fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет GET-запрос с текущими настройками сессии.  <br /></td></tr>
+<tr class="memitem:a17cd5ab844568f357b99d14e66194b66" id="r_a17cd5ab844568f357b99d14e66194b66"><td class="memItemLeft"><a class="el" href="structhis_1_1_http_response.html">HttpResponse</a>&#160;</td><td class="memItemRight"><a class="el" href="#a17cd5ab844568f357b99d14e66194b66">post</a> (const std::string &amp;url, const <a class="el" href="namespacehis.html#a47f7a7a59b8841b5110513956864ae13">QueryParams</a> &amp;form) const</td></tr>
+<tr class="memdesc:a17cd5ab844568f357b99d14e66194b66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Выполняет POST-запрос с телом из переданных пар (form-urlencoded).  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>HTTP-сессия: хранит общие для запросов настройки и выполняет GET/POST. </p>
+<p>Повторяет поведение build_session из исходного Python-инструмента: задаёт User-Agent, пользовательские заголовки, cookie, прокси и отключение проверки TLS-сертификата (для тестирования через прокси). </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Конструктор(ы)</h2>
+<a id="a8f65afdf40b379590975a62f3d4fd9ed" name="a8f65afdf40b379590975a62f3d4fd9ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f65afdf40b379590975a62f3d4fd9ed">&#9670;&#160;</a></span>Session()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">his::Session::Session </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Создаёт сессию с браузерным User-Agent и отключённой проверкой TLS. </p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Методы</h2>
+<a id="a25201c7fc5730bdfb1fc90fa3c1b4d9c" name="a25201c7fc5730bdfb1fc90fa3c1b4d9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25201c7fc5730bdfb1fc90fa3c1b4d9c">&#9670;&#160;</a></span>add_header()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void his::Session::add_header </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавляет/перезаписывает заголовок. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Имя заголовка. </td></tr>
+    <tr><td class="paramname">value</td><td>Значение заголовка. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a125eb7a6d5445a52d3da9ae5ca807d8c" name="a125eb7a6d5445a52d3da9ae5ca807d8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a125eb7a6d5445a52d3da9ae5ca807d8c">&#9670;&#160;</a></span>add_header_line()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void his::Session::add_header_line </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>line</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавляет заголовок из строки "Name: value". </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">line</td><td>Строка заголовка. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a974dc22c9df7d62735ead7efb6a498fc" name="a974dc22c9df7d62735ead7efb6a498fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a974dc22c9df7d62735ead7efb6a498fc">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhis_1_1_http_response.html">HttpResponse</a> his::Session::get </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>url</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Выполняет GET-запрос с текущими настройками сессии. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">url</td><td>Целевой URL. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Ответ сервера. </dd></dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>при транспортной ошибке (DNS, соединение, таймаут). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a17cd5ab844568f357b99d14e66194b66" name="a17cd5ab844568f357b99d14e66194b66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17cd5ab844568f357b99d14e66194b66">&#9670;&#160;</a></span>post()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structhis_1_1_http_response.html">HttpResponse</a> his::Session::post </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>url</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="namespacehis.html#a47f7a7a59b8841b5110513956864ae13">QueryParams</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>form</em></span>&#160;) const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Выполняет POST-запрос с телом из переданных пар (form-urlencoded). </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">url</td><td>Целевой URL (без query, либо query игнорируется телом). </td></tr>
+    <tr><td class="paramname">form</td><td>Пары ключ-значение тела запроса. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>Ответ сервера. </dd></dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>при транспортной ошибке. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a045a1cd3de02c7b4b985b7e5a36d331b" name="a045a1cd3de02c7b4b985b7e5a36d331b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a045a1cd3de02c7b4b985b7e5a36d331b">&#9670;&#160;</a></span>set_cookies()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void his::Session::set_cookies </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>cookie_str</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Задаёт cookie из строки "k=v; k2=v2". </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cookie_str</td><td>Строка cookie. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ade0e2bf7e781daea4a654aec74df7d32" name="ade0e2bf7e781daea4a654aec74df7d32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade0e2bf7e781daea4a654aec74df7d32">&#9670;&#160;</a></span>set_proxy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void his::Session::set_proxy </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>proxy</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Задаёт HTTP/HTTPS прокси. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">proxy</td><td>URL прокси, например "http://127.0.0.1:8080". </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a64b0f5f99133663ab3a431a271b8c760" name="a64b0f5f99133663ab3a431a271b8c760"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64b0f5f99133663ab3a431a271b8c760">&#9670;&#160;</a></span>set_timeout_ms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void his::Session::set_timeout_ms </td>
+          <td>(</td>
+          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>ms</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Задаёт таймаут запроса в миллисекундах. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ms</td><td>Таймаут, мс. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a275a239c829dde41d352e0f76ff615a9" name="a275a239c829dde41d352e0f76ff615a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a275a239c829dde41d352e0f76ff615a9">&#9670;&#160;</a></span>set_user_agent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void his::Session::set_user_agent </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>ua</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Устанавливает строку User-Agent. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ua</td><td>Значение заголовка User-Agent. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abe4df2771cf2be677379ed3461547eba" name="abe4df2771cf2be677379ed3461547eba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe4df2771cf2be677379ed3461547eba">&#9670;&#160;</a></span>set_verify_ssl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void his::Session::set_verify_ssl </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>verify</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Включает/выключает проверку TLS-сертификата. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">verify</td><td>true — проверять сертификат. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>src/<a class="el" href="http__client_8hpp_source.html">http_client.hpp</a></li>
+<li>src/<a class="el" href="http__client_8cpp.html">http_client.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacehis.html">his</a></li><li class="navelem"><a href="classhis_1_1_session.html">Session</a></li>
+    <li class="footer">Создано системой <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

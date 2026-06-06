@@ -37,7 +37,8 @@ void Reporter::run_info(const std::string& payload, const std::string& marker,
 void Reporter::scan_header(const std::string& url, std::size_t param_count,
                            const std::string& method) const {
   if (silent_) return;
-  out_ << "\n" << paint(kCyan) << "[*] Scanning " << url << paint(kReset) << " (" << param_count
+  out_ << "\n"
+       << paint(kCyan) << "[*] Scanning " << url << paint(kReset) << " (" << param_count
        << " params, method=" << method << ")\n";
 }
 

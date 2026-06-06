@@ -34,8 +34,7 @@ ResponseFn make_server(std::set<std::string> vulnerable) {
 }
 
 bool contains(const std::vector<ScanHit>& hits, const std::string& name) {
-  return std::any_of(hits.begin(), hits.end(),
-                     [&](const ScanHit& h) { return h.param == name; });
+  return std::any_of(hits.begin(), hits.end(), [&](const ScanHit& h) { return h.param == name; });
 }
 
 }  // namespace
@@ -64,7 +63,8 @@ TEST_CASE("pack_batch fills up to the URL length limit") {
 
 TEST_CASE("scan_url finds a single vulnerable param in a big batch") {
   const std::vector<std::string> params{"a", "b", "coupon", "d", "e", "f", "g"};
-  const auto hits = scan_url("https://e.com/p", params, kPayload, kMarker, 4000, make_server({"coupon"}));
+  const auto hits =
+      scan_url("https://e.com/p", params, kPayload, kMarker, 4000, make_server({"coupon"}));
   REQUIRE(hits.size() == 1);
   CHECK(hits[0].param == "coupon");
   CHECK(hits[0].status == 200);
@@ -88,7 +88,8 @@ TEST_CASE("scan_url returns nothing when no param reflects") {
 TEST_CASE("scan_url works across multiple batches with a small limit") {
   const std::vector<std::string> params{"a", "b", "coupon", "d", "e"};
   // Small limit forces one param per batch (linear scan path).
-  const auto hits = scan_url("https://e.com/p", params, kPayload, kMarker, 1, make_server({"coupon"}));
+  const auto hits =
+      scan_url("https://e.com/p", params, kPayload, kMarker, 1, make_server({"coupon"}));
   REQUIRE(hits.size() == 1);
   CHECK(hits[0].param == "coupon");
 }

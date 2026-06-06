@@ -35,14 +35,14 @@ std::vector<std::string> select_by_indices(const std::vector<std::string>& items
 /// \param out Поток вывода.
 /// \return Выбранные имена параметров.
 std::vector<std::string> interactive_select(const std::vector<std::string>& params,
-                                             const std::string& source_label, std::istream& in,
-                                             std::ostream& out);
+                                            const std::string& source_label, std::istream& in,
+                                            std::ostream& out);
 
 /// \brief Интерактивный выбор через стандартные потоки ввода-вывода.
 /// \param params Доступные имена параметров.
 /// \param source_label Метка источника.
 /// \return Выбранные имена параметров.
 std::vector<std::string> interactive_select(const std::vector<std::string>& params,
-                                             const std::string& source_label);
+                                            const std::string& source_label);
 
 }  // namespace his

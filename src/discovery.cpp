@@ -37,7 +37,7 @@ std::vector<std::string> params_from_url(const std::string& url) {
 
 std::vector<std::string> params_from_html(const std::string& html, HtmlScanMode mode) {
   static const std::regex input_re(R"(<input[^>]+name=["']?([^"'\s>]+))",
-                                    std::regex::icase | std::regex::optimize);
+                                   std::regex::icase | std::regex::optimize);
   static const std::regex any_re(R"(name=["']?([^"'\s>]+))",
                                  std::regex::icase | std::regex::optimize);
   const std::regex& re = (mode == HtmlScanMode::Input) ? input_re : any_re;
@@ -59,15 +59,46 @@ std::vector<std::string> load_wordlist(const std::string& path) {
 }
 
 const std::vector<std::string>& default_extra_params() {
-  static const std::vector<std::string> params = {
-      "bankId",      "bankName",    "balanceSum",   "birthday",   "sex",
-      "objectTypeId", "coupon",     "admitadUid",   "clickId",    "subId",
-      "saleChannelIsn", "curatorIsn", "agentIsn",   "bankStringCode", "advertiseUid",
-      "utmCampaign", "utmContent",  "utmMedium",    "utmSource",  "utmTerm",
-      "workleUid",   "subAgent",    "sub_id",       "click_id",   "utm_source",
-      "utm_medium",  "utm_campaign", "utm_content", "utm_term",   "ref",
-      "redirect",    "url",         "next",         "return",     "callback",
-      "search",      "q",           "query",        "page",       "id"};
+  static const std::vector<std::string> params = {"bankId",
+                                                  "bankName",
+                                                  "balanceSum",
+                                                  "birthday",
+                                                  "sex",
+                                                  "objectTypeId",
+                                                  "coupon",
+                                                  "admitadUid",
+                                                  "clickId",
+                                                  "subId",
+                                                  "saleChannelIsn",
+                                                  "curatorIsn",
+                                                  "agentIsn",
+                                                  "bankStringCode",
+                                                  "advertiseUid",
+                                                  "utmCampaign",
+                                                  "utmContent",
+                                                  "utmMedium",
+                                                  "utmSource",
+                                                  "utmTerm",
+                                                  "workleUid",
+                                                  "subAgent",
+                                                  "sub_id",
+                                                  "click_id",
+                                                  "utm_source",
+                                                  "utm_medium",
+                                                  "utm_campaign",
+                                                  "utm_content",
+                                                  "utm_term",
+                                                  "ref",
+                                                  "redirect",
+                                                  "url",
+                                                  "next",
+                                                  "return",
+                                                  "callback",
+                                                  "search",
+                                                  "q",
+                                                  "query",
+                                                  "page",
+                                                  "id"};
   return params;
 }
 
