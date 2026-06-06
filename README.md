@@ -187,7 +187,7 @@ Session:
 Scan behaviour:
       --auto              без интерактива: выбрать все найденные параметры
       --max-url-len <n>   макс. длина URL в батче (по умолчанию: 2000)
-      --threads <n>       до N URL параллельно (нужен --auto, по умолчанию: 1)
+      --threads <n>       run up to N checks in parallel (default: 1)
   -s, --silent            печатать только находки
   -o, --output <file>     сохранить находки в TSV-файл
   -h, --help              показать справку
