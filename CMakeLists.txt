@@ -43,7 +43,8 @@ add_library(
   src/http_client.cpp
   src/discovery.cpp
   src/selector.cpp
-  src/scanner.cpp)
+  src/scanner.cpp
+  src/cli.cpp)
 target_include_directories(scanner_lib PUBLIC src)
 target_link_libraries(scanner_lib PUBLIC cpr::cpr)
 target_compile_definitions(scanner_lib PUBLIC HIS_VERSION="${PROJECT_VERSION}")
