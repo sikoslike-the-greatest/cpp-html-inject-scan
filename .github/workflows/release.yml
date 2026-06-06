@@ -1,0 +1,68 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to build and release (e.g. v1.0.0)'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            name: linux-x86_64
+            asset: html-inject-scan-linux-x86_64.tar.gz
+          - os: macos-latest
+            name: macos-arm64
+            asset: html-inject-scan-macos-arm64.tar.gz
+          - os: windows-latest
+            name: windows-x86_64
+            asset: html-inject-scan-windows-x86_64.zip
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake libssl-dev zlib1g-dev
+
+      - name: Configure
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Package (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          BIN=$(find build -maxdepth 3 -name html-inject-scan -type f | head -n1)
+          cp "$BIN" html-inject-scan
+          tar -czf "${{ matrix.asset }}" html-inject-scan README.md
+
+      - name: Package (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $bin = Get-ChildItem -Recurse -Path build -Filter html-inject-scan.exe | Select-Object -First 1
+          Copy-Item $bin.FullName html-inject-scan.exe
+          Compress-Archive -Path html-inject-scan.exe, README.md -DestinationPath "${{ matrix.asset }}"
+
+      - name: Attach binary to release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.tag || github.ref_name }}
+          files: ${{ matrix.asset }}
