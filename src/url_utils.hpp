@@ -32,6 +32,16 @@ using QueryParams = std::vector<std::pair<std::string, std::string>>;
 /// \return Структура \ref ParsedUrl с заполненными компонентами.
 ParsedUrl parse_url(const std::string& url);
 
+/// \brief Проверяет, что URL пригоден для запроса (схема http/https и хост).
+///
+/// Защищает от случая, когда пользователь передал адрес без схемы
+/// (например "example.com/page") — иначе запрос ушёл бы «в никуда» и висел до
+/// таймаута. Бросает исключение вместо тихого ожидания.
+/// \param url Проверяемый URL.
+/// \throws std::invalid_argument если отсутствует схема, схема не http/https,
+///         либо отсутствует хост.
+void validate_url(const std::string& url);
+
 /// \brief Процентное (percent) кодирование строки для query-компонента.
 ///
 /// Незарезервированные символы (A-Z a-z 0-9 - _ . ~) остаются как есть,

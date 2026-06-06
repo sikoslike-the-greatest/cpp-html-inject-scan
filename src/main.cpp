@@ -56,6 +56,9 @@ std::vector<std::string> collect_urls(const Options& opt) {
   if (!opt.url_list_path.empty()) {
     for (auto& u : his::load_wordlist(opt.url_list_path)) urls.push_back(std::move(u));
   }
+  // Fail fast on malformed targets (e.g. missing scheme) instead of firing a
+  // request into the void and waiting for the timeout.
+  for (const auto& u : urls) his::validate_url(u);
   return urls;
 }
 

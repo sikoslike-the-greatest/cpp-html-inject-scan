@@ -1,5 +1,7 @@
 #include <doctest/doctest.h>
 
+#include <stdexcept>
+
 #include "url_utils.hpp"
 
 using namespace his;
@@ -20,6 +22,17 @@ TEST_CASE("parse_url handles missing query and path") {
   CHECK(p.path.empty());
   CHECK(p.query.empty());
   CHECK(p.fragment.empty());
+}
+
+TEST_CASE("validate_url accepts http/https and rejects malformed targets") {
+  CHECK_NOTHROW(validate_url("https://example.com/page?id=1"));
+  CHECK_NOTHROW(validate_url("HTTP://Example.com"));
+  // Missing scheme: would otherwise hang until timeout.
+  CHECK_THROWS_AS(validate_url("example.com/page"), std::invalid_argument);
+  // Unsupported scheme.
+  CHECK_THROWS_AS(validate_url("ftp://example.com"), std::invalid_argument);
+  // Missing host.
+  CHECK_THROWS_AS(validate_url("http://"), std::invalid_argument);
 }
 
 TEST_CASE("url_encode encodes reserved, keeps unreserved") {
