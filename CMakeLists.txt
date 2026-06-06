@@ -14,6 +14,8 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
 
+option(HIS_BUILD_TESTS "Build unit tests (requires doctest)" ON)
+
 find_package(Threads REQUIRED)
 
 include(FetchContent)
@@ -25,16 +27,18 @@ FetchContent_Declare(
   GIT_TAG 1.11.0)
 FetchContent_MakeAvailable(cpr)
 
-# Header-only test framework (built by CMake via FetchContent).
-# doctest 2.4.11 declares a CMake minimum older than CMake 4 accepts, so we
-# relax the policy minimum just for its sub-configuration.
-set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
-FetchContent_Declare(
-  doctest
-  GIT_REPOSITORY https://github.com/doctest/doctest.git
-  GIT_TAG v2.4.11)
-FetchContent_MakeAvailable(doctest)
-unset(CMAKE_POLICY_VERSION_MINIMUM)
+if(HIS_BUILD_TESTS)
+  # Header-only test framework (built by CMake via FetchContent).
+  # doctest 2.4.11 declares a CMake minimum older than CMake 4 accepts, so we
+  # relax the policy minimum just for its sub-configuration.
+  set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
+  FetchContent_Declare(
+    doctest
+    GIT_REPOSITORY https://github.com/doctest/doctest.git
+    GIT_TAG v2.4.11)
+  FetchContent_MakeAvailable(doctest)
+  unset(CMAKE_POLICY_VERSION_MINIMUM)
+endif()
 
 # Core library: every module lives here so both the executable and the
 # test target build from exactly the same sources.
@@ -55,5 +59,7 @@ target_compile_definitions(scanner_lib PUBLIC HIS_VERSION="${PROJECT_VERSION}")
 add_executable(html-inject-scan src/main.cpp)
 target_link_libraries(html-inject-scan PRIVATE scanner_lib)
 
-enable_testing()
-add_subdirectory(tests)
+if(HIS_BUILD_TESTS)
+  enable_testing()
+  add_subdirectory(tests)
+endif()
