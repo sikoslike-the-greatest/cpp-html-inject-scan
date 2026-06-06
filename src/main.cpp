@@ -1,3 +1,5 @@
+#include <unistd.h>
+
 #include <iostream>
 #include <string>
 #include <utility>
@@ -6,10 +8,10 @@
 #include "cli.hpp"
 #include "discovery.hpp"
 #include "http_client.hpp"
+#include "report.hpp"
 #include "scanner.hpp"
 #include "selector.hpp"
 #include "url_utils.hpp"
-#include "version.hpp"
 
 /// \file main.cpp
 /// \brief Точка входа: разбор аргументов и склейка модулей сканера.
@@ -57,7 +59,8 @@ std::vector<std::string> collect_urls(const Options& opt) {
 
 // Gathers candidate parameters for a URL grouped by source label.
 std::vector<std::pair<std::string, std::vector<std::string>>> gather_sources(
-    const Session& session, const std::string& url, const Options& opt) {
+    const Session& session, const std::string& url, const Options& opt,
+    const his::Reporter& reporter) {
   std::vector<std::pair<std::string, std::vector<std::string>>> sources;
 
   const auto url_params = his::params_from_url(url);
@@ -69,7 +72,7 @@ std::vector<std::pair<std::string, std::vector<std::string>>> gather_sources(
       auto html_params = his::params_from_html(page.text, opt.mode);
       if (!html_params.empty()) sources.emplace_back("HTML page", std::move(html_params));
     } catch (const std::exception& e) {
-      std::cerr << "  [!] HTML scan failed: " << e.what() << "\n";
+      reporter.warn(std::string("HTML scan failed: ") + e.what());
     }
   }
 
@@ -104,36 +107,30 @@ void run(const Options& opt) {
   const auto sender = make_sender(session, opt.method);
   const std::vector<std::string> urls = collect_urls(opt);
 
-  if (!opt.silent) {
-    std::cout << his::version_string() << "\n";
-    std::cout << "  payload : " << opt.payload << "\n";
-    std::cout << "  marker  : " << opt.marker << "\n";
-    std::cout << "  method  : " << opt.method << "\n";
-    std::cout << "  urls    : " << urls.size() << "\n";
-  }
+  const bool color = isatty(STDOUT_FILENO) != 0;
+  const his::Reporter reporter(std::cout, opt.silent, color);
+  reporter.run_info(opt.payload, opt.marker, opt.method, urls.size());
 
   std::vector<ScanHit> all_hits;
   for (const auto& url : urls) {
-    const auto sources = gather_sources(session, url, opt);
+    const auto sources = gather_sources(session, url, opt, reporter);
     const auto selected = select_params(sources, opt);
     if (selected.empty()) {
-      if (!opt.silent) std::cout << "  no params selected for " << url << ", skipping\n";
+      reporter.skipped(url);
       continue;
     }
-    if (!opt.silent) {
-      std::cout << "\n[*] Scanning " << url << " (" << selected.size()
-                << " params, method=" << opt.method << ")\n";
-    }
+    reporter.scan_header(url, selected.size(), opt.method);
     const auto hits =
         his::scan_url(url, selected, opt.payload, opt.marker, opt.max_url_len, sender);
-    for (const auto& h : hits) {
-      std::cout << "  [REFLECTED] " << h.param << "  " << h.status << "  " << h.url << "\n";
-    }
+    for (const auto& h : hits) reporter.hit(h);
     all_hits.insert(all_hits.end(), hits.begin(), hits.end());
   }
 
-  if (!opt.silent) {
-    std::cout << "\n" << (all_hits.empty() ? "No reflections found." : "Done.") << "\n";
+  reporter.summary(all_hits.size());
+
+  if (!opt.output_path.empty()) {
+    his::save_hits_tsv(opt.output_path, all_hits);
+    reporter.warn("saved findings to " + opt.output_path);
   }
 }
 
