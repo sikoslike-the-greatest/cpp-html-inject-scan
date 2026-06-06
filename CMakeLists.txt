@@ -14,6 +14,8 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
 
+find_package(Threads REQUIRED)
+
 include(FetchContent)
 
 # Third-party HTTP client (built by CMake via FetchContent).
@@ -47,7 +49,7 @@ add_library(
   src/cli.cpp
   src/report.cpp)
 target_include_directories(scanner_lib PUBLIC src)
-target_link_libraries(scanner_lib PUBLIC cpr::cpr)
+target_link_libraries(scanner_lib PUBLIC cpr::cpr Threads::Threads)
 target_compile_definitions(scanner_lib PUBLIC HIS_VERSION="${PROJECT_VERSION}")
 
 add_executable(html-inject-scan src/main.cpp)

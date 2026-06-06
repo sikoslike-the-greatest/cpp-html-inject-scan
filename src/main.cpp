@@ -8,6 +8,7 @@
 #include "cli.hpp"
 #include "discovery.hpp"
 #include "http_client.hpp"
+#include "parallel.hpp"
 #include "report.hpp"
 #include "scanner.hpp"
 #include "selector.hpp"
@@ -57,10 +58,20 @@ std::vector<std::string> collect_urls(const Options& opt) {
   return urls;
 }
 
+// Aggregated outcome of scanning a single URL, collected so that printing can
+// happen sequentially even when scans run in parallel.
+struct UrlScanResult {
+  std::string url;
+  std::size_t param_count = 0;
+  bool skipped = false;
+  std::vector<ScanHit> hits;
+  std::vector<std::string> warnings;
+};
+
 // Gathers candidate parameters for a URL grouped by source label.
 std::vector<std::pair<std::string, std::vector<std::string>>> gather_sources(
     const Session& session, const std::string& url, const Options& opt,
-    const his::Reporter& reporter) {
+    std::vector<std::string>& warnings) {
   std::vector<std::pair<std::string, std::vector<std::string>>> sources;
 
   const auto url_params = his::params_from_url(url);
@@ -72,7 +83,7 @@ std::vector<std::pair<std::string, std::vector<std::string>>> gather_sources(
       auto html_params = his::params_from_html(page.text, opt.mode);
       if (!html_params.empty()) sources.emplace_back("HTML page", std::move(html_params));
     } catch (const std::exception& e) {
-      reporter.warn(std::string("HTML scan failed: ") + e.what());
+      warnings.push_back(std::string("HTML scan failed: ") + e.what());
     }
   }
 
@@ -102,6 +113,21 @@ std::vector<std::string> select_params(
   return his::dedup_preserve_order(merged);
 }
 
+UrlScanResult scan_one(const Session& session, const his::ResponseFn& sender,
+                       const std::string& url, const Options& opt) {
+  UrlScanResult res;
+  res.url = url;
+  const auto sources = gather_sources(session, url, opt, res.warnings);
+  const auto selected = select_params(sources, opt);
+  res.param_count = selected.size();
+  if (selected.empty()) {
+    res.skipped = true;
+    return res;
+  }
+  res.hits = his::scan_url(url, selected, opt.payload, opt.marker, opt.max_url_len, sender);
+  return res;
+}
+
 void run(const Options& opt) {
   const Session session = build_session(opt);
   const auto sender = make_sender(session, opt.method);
@@ -111,19 +137,27 @@ void run(const Options& opt) {
   const his::Reporter reporter(std::cout, opt.silent, color);
   reporter.run_info(opt.payload, opt.marker, opt.method, urls.size());
 
+  const auto worker = [&](const std::string& url) { return scan_one(session, sender, url, opt); };
+
+  std::vector<UrlScanResult> results;
+  // Parallel scanning is only safe without interactive selection (stdin).
+  if (opt.threads > 1 && opt.autoselect) {
+    results = his::parallel_map(urls, worker, opt.threads);
+  } else {
+    results.reserve(urls.size());
+    for (const auto& url : urls) results.push_back(worker(url));
+  }
+
   std::vector<ScanHit> all_hits;
-  for (const auto& url : urls) {
-    const auto sources = gather_sources(session, url, opt, reporter);
-    const auto selected = select_params(sources, opt);
-    if (selected.empty()) {
-      reporter.skipped(url);
+  for (const auto& res : results) {
+    for (const auto& w : res.warnings) reporter.warn(w);
+    if (res.skipped) {
+      reporter.skipped(res.url);
       continue;
     }
-    reporter.scan_header(url, selected.size(), opt.method);
-    const auto hits =
-        his::scan_url(url, selected, opt.payload, opt.marker, opt.max_url_len, sender);
-    for (const auto& h : hits) reporter.hit(h);
-    all_hits.insert(all_hits.end(), hits.begin(), hits.end());
+    reporter.scan_header(res.url, res.param_count, opt.method);
+    for (const auto& h : res.hits) reporter.hit(h);
+    all_hits.insert(all_hits.end(), res.hits.begin(), res.hits.end());
   }
 
   reporter.summary(all_hits.size());

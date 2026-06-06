@@ -8,7 +8,8 @@ add_executable(
   test_selector.cpp
   test_scanner.cpp
   test_cli.cpp
-  test_report.cpp)
+  test_report.cpp
+  test_parallel.cpp)
 target_link_libraries(unit_tests PRIVATE scanner_lib doctest::doctest)
 
 include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)

@@ -95,6 +95,8 @@ Options parse_args(const std::vector<std::string>& args) {
       opt.silent = true;
     } else if (a == "--max-url-len") {
       opt.max_url_len = parse_number<std::size_t>(need_value(i, a), a);
+    } else if (a == "--threads") {
+      opt.threads = parse_number<std::size_t>(need_value(i, a), a);
     } else if (a == "--timeout") {
       opt.timeout_ms = parse_number<long>(need_value(i, a), a);
     } else if (a == "-o" || a == "--output") {
@@ -141,6 +143,7 @@ std::string usage_text() {
       "Scan behaviour:\n"
       "      --auto              non-interactive: select all discovered params\n"
       "      --max-url-len <n>   max URL length per batch (default: 2000)\n"
+      "      --threads <n>       scan up to N urls in parallel (needs --auto, default: 1)\n"
       "  -s, --silent            print only findings\n"
       "  -o, --output <file>     save findings to a TSV file\n"
       "  -h, --help              show this help\n";
