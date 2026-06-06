@@ -20,10 +20,17 @@ option(HIS_BUILD_TESTS "Build unit tests (requires doctest)" ON)
 # statically so the released binary has no external .dylib/.so dependencies.
 set(BUILD_SHARED_LIBS OFF)
 
-# Disable nghttp2/HTTP2 in the bundled curl: otherwise the binary picks up a
-# non-system libnghttp2.dylib and fails to run on other machines. HTTP/1.1 is
-# sufficient for reflection scanning.
+# Disable optional curl third-party dependencies. Otherwise curl auto-detects
+# them on the build machine (e.g. Homebrew) and links them dynamically/statically,
+# which makes the static binary fail to build ("library 'idn2' not found") or
+# fail to run on other machines. None of these are needed for reflection scanning.
 set(USE_NGHTTP2 OFF CACHE BOOL "" FORCE)
+set(USE_LIBIDN2 OFF CACHE BOOL "" FORCE)
+set(CURL_USE_LIBPSL OFF CACHE BOOL "" FORCE)
+set(CURL_USE_LIBSSH2 OFF CACHE BOOL "" FORCE)
+set(CURL_USE_LIBSSH OFF CACHE BOOL "" FORCE)
+set(CURL_BROTLI OFF CACHE BOOL "" FORCE)
+set(CURL_ZSTD OFF CACHE BOOL "" FORCE)
 
 find_package(Threads REQUIRED)
 
