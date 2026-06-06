@@ -21,14 +21,9 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            name: linux-x86_64
-            asset: html-inject-scan-linux-x86_64.tar.gz
+            asset: html-inject-scan-linux-x86_64
           - os: macos-latest
-            name: macos-arm64
-            asset: html-inject-scan-macos-arm64.tar.gz
-          - os: windows-latest
-            name: windows-x86_64
-            asset: html-inject-scan-windows-x86_64.zip
+            asset: html-inject-scan-macos-arm64
 
     steps:
       - name: Checkout
@@ -46,20 +41,10 @@ jobs:
       - name: Build
         run: cmake --build build --config Release
 
-      - name: Package (Unix)
-        if: runner.os != 'Windows'
+      - name: Rename binary
         run: |
           BIN=$(find build -maxdepth 3 -name html-inject-scan -type f | head -n1)
-          cp "$BIN" html-inject-scan
-          tar -czf "${{ matrix.asset }}" html-inject-scan README.md
-
-      - name: Package (Windows)
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: |
-          $bin = Get-ChildItem -Recurse -Path build -Filter html-inject-scan.exe | Select-Object -First 1
-          Copy-Item $bin.FullName html-inject-scan.exe
-          Compress-Archive -Path html-inject-scan.exe, README.md -DestinationPath "${{ matrix.asset }}"
+          cp "$BIN" "${{ matrix.asset }}"
 
       - name: Attach binary to release
         uses: softprops/action-gh-release@v2
