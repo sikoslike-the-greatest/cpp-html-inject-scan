@@ -1,6 +1,8 @@
 #include "url_utils.hpp"
 
+#include <algorithm>
 #include <cctype>
+#include <stdexcept>
 #include <unordered_set>
 
 namespace his {
@@ -9,6 +11,12 @@ namespace {
 
 bool is_unreserved(unsigned char c) {
   return std::isalnum(c) != 0 || c == '-' || c == '_' || c == '.' || c == '~';
+}
+
+std::string to_lower(std::string s) {
+  std::transform(s.begin(), s.end(), s.begin(),
+                 [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+  return s;
 }
 
 int hex_value(char c) {
@@ -52,6 +60,22 @@ ParsedUrl parse_url(const std::string& url) {
   }
 
   return out;
+}
+
+void validate_url(const std::string& url) {
+  const ParsedUrl parsed = parse_url(url);
+  if (parsed.scheme.empty()) {
+    throw std::invalid_argument("invalid URL '" + url +
+                                "': missing scheme, expected http:// or https://");
+  }
+  const std::string scheme = to_lower(parsed.scheme);
+  if (scheme != "http" && scheme != "https") {
+    throw std::invalid_argument("invalid URL '" + url + "': unsupported scheme '" + parsed.scheme +
+                                "', expected http or https");
+  }
+  if (parsed.authority.empty()) {
+    throw std::invalid_argument("invalid URL '" + url + "': missing host");
+  }
 }
 
 std::string url_encode(const std::string& value) {
