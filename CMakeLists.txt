@@ -36,7 +36,7 @@ unset(CMAKE_POLICY_VERSION_MINIMUM)
 
 # Core library: every module lives here so both the executable and the
 # test target build from exactly the same sources.
-add_library(scanner_lib src/version.cpp)
+add_library(scanner_lib src/version.cpp src/url_utils.cpp)
 target_include_directories(scanner_lib PUBLIC src)
 target_link_libraries(scanner_lib PUBLIC cpr::cpr)
 target_compile_definitions(scanner_lib PUBLIC HIS_VERSION="${PROJECT_VERSION}")
