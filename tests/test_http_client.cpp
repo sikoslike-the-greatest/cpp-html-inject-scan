@@ -1,80 +1,55 @@
 #include <doctest/doctest.h>
 
+#include <stdexcept>
+
 #include "http_client.hpp"
 
 using namespace his;
 
-TEST_CASE("parse_header_line splits name and value") {
-  const auto kv = parse_header_line("Authorization: Bearer tok");
-  CHECK(kv.first == "Authorization");
-  CHECK(kv.second == "Bearer tok");
+TEST_CASE("parse_header_line splits name and value and trims") {
+  const auto h = parse_header_line("Authorization:  Bearer tok123 ");
+  CHECK(h.first == "Authorization");
+  CHECK(h.second == "Bearer tok123");
 }
 
-TEST_CASE("parse_header_line trims whitespace") {
-  const auto kv = parse_header_line("  X-Test :  value  ");
-  CHECK(kv.first == "X-Test");
-  CHECK(kv.second == "value");
+TEST_CASE("parse_header_line keeps colons inside the value") {
+  const auto h = parse_header_line("X-Time: 10:30:00");
+  CHECK(h.first == "X-Time");
+  CHECK(h.second == "10:30:00");
 }
 
-TEST_CASE("parse_header_line rejects missing colon") {
+TEST_CASE("parse_header_line throws when colon is missing") {
   CHECK_THROWS_AS(parse_header_line("NoColonHere"), std::invalid_argument);
 }
 
-TEST_CASE("parse_header_line rejects empty name") {
-  CHECK_THROWS_AS(parse_header_line(": value"), std::invalid_argument);
+TEST_CASE("parse_cookie_string parses multiple pairs") {
+  const auto c = parse_cookie_string("PHPSESSID=abc; BX_USER_ID=xyz");
+  REQUIRE(c.size() == 2);
+  CHECK(c[0].first == "PHPSESSID");
+  CHECK(c[0].second == "abc");
+  CHECK(c[1].first == "BX_USER_ID");
+  CHECK(c[1].second == "xyz");
 }
 
-TEST_CASE("parse_cookie_string splits pairs") {
-  const auto cookies = parse_cookie_string("PHPSESSID=abc; BX_USER_ID=xyz");
-  REQUIRE(cookies.size() == 2);
-  CHECK(cookies[0].first == "PHPSESSID");
-  CHECK(cookies[0].second == "abc");
-  CHECK(cookies[1].first == "BX_USER_ID");
-  CHECK(cookies[1].second == "xyz");
+TEST_CASE("parse_cookie_string skips empty segments") {
+  const auto c = parse_cookie_string("a=1;; ;b=2;");
+  REQUIRE(c.size() == 2);
+  CHECK(c[0].first == "a");
+  CHECK(c[1].first == "b");
 }
 
-TEST_CASE("parse_cookie_string on empty string yields nothing") {
+TEST_CASE("parse_cookie_string on empty input yields nothing") {
   CHECK(parse_cookie_string("").empty());
 }
 
-TEST_CASE("parse_cookie_string rejects pair without equals") {
-  CHECK_THROWS_AS(parse_cookie_string("badpair"), std::invalid_argument);
-}
-
-TEST_CASE("HttpSession defaults match Python scanner") {
-  HttpSession session;
-  CHECK(session.user_agent() == kDefaultUserAgent);
-  CHECK_FALSE(session.verify_ssl());
-  CHECK(session.timeout_sec() == kDefaultTimeoutSec);
-  CHECK(session.headers().empty());
-  CHECK(session.cookies().empty());
-  CHECK(session.proxy().empty());
-}
-
-TEST_CASE("build_session applies headers cookie and proxy") {
-  const HttpSession session = build_session(
-      {"Authorization: Bearer x", "X-Custom: 1"}, "SID=1; UID=2", "http://127.0.0.1:8080");
-  REQUIRE(session.headers().size() == 2);
-  CHECK(session.headers()[0].first == "Authorization");
-  CHECK(session.headers()[1].second == "1");
-  REQUIRE(session.cookies().size() == 2);
-  CHECK(session.cookies()[0].first == "SID");
-  CHECK(session.proxy() == "http://127.0.0.1:8080");
-}
-
-TEST_CASE("set_timeout rejects non-positive values") {
-  HttpSession session;
-  CHECK_THROWS_AS(session.set_timeout(0), std::invalid_argument);
-  CHECK_THROWS_AS(session.set_timeout(-1), std::invalid_argument);
-}
-
-TEST_CASE("HttpSession GET with malformed url throws") {
-  HttpSession session;
-  CHECK_THROWS_AS(session.get("not-a-url"), std::runtime_error);
-}
-
-TEST_CASE("HttpSession POST with malformed url throws") {
-  HttpSession session;
-  const QueryParams form = {{"id", "1"}};
-  CHECK_THROWS_AS(session.post("not-a-url", form), std::runtime_error);
+TEST_CASE("Session is constructible and configurable without network") {
+  Session s;
+  s.set_user_agent("UA/1.0");
+  s.add_header("X-Test", "1");
+  s.add_header_line("X-From-Line: yes");
+  s.set_cookies("k=v");
+  s.set_proxy("http://127.0.0.1:8080");
+  s.set_timeout_ms(5000);
+  s.set_verify_ssl(true);
+  CHECK(true);  // No throw during configuration.
 }

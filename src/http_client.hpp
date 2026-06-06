@@ -7,123 +7,89 @@
 #include "url_utils.hpp"
 
 /// \file http_client.hpp
-/// \brief HTTP-сессия с поддержкой заголовков, cookie, прокси, GET и POST.
+/// \brief HTTP-сессия с поддержкой заголовков, cookie и прокси поверх cpr.
 
 namespace his {
 
-/// \brief User-Agent по умолчанию (как в Python-версии сканера).
-constexpr const char* kDefaultUserAgent =
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-    "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
-
-/// \brief Таймаут запроса по умолчанию, секунды.
-constexpr int kDefaultTimeoutSec = 15;
-
 /// \brief Результат HTTP-запроса.
 struct HttpResponse {
-  int status_code = 0;  ///< HTTP-код ответа (0 при сетевой ошибке до ответа).
-  std::string body;     ///< Тело ответа.
+  long status = 0;       ///< HTTP статус-код ответа (например, 200).
+  std::string text;      ///< Тело ответа целиком.
+  std::size_t length{};  ///< Длина тела ответа в байтах.
 };
 
-/// \brief Разбирает строку заголовка формата "Name: value".
+/// \brief Разбирает строку заголовка вида "Name: value".
+///
+/// Делит по первому двоеточию, обрезает пробелы вокруг имени и значения.
 /// \param line Строка заголовка.
-/// \return Пара (имя, значение) с обрезанными пробелами.
-/// \throws std::invalid_argument если ':' отсутствует или имя пустое.
+/// \return Пара (имя, значение).
+/// \throws std::invalid_argument если двоеточие отсутствует.
 std::pair<std::string, std::string> parse_header_line(const std::string& line);
 
-/// \brief Разбирает cookie-строку формата "name=val; name2=val2".
-/// \param cookie_string Строка cookie.
-/// \return Список пар имя-значение.
-/// \throws std::invalid_argument если встречена пара без '=' или с пустым именем.
-std::vector<std::pair<std::string, std::string>> parse_cookie_string(
-    const std::string& cookie_string);
+/// \brief Разбирает строку cookie вида "k=v; k2=v2".
+/// \param cookies Строка cookie, пары разделены ';'.
+/// \return Список пар (имя, значение); пустые сегменты пропускаются.
+std::vector<std::pair<std::string, std::string>> parse_cookie_string(const std::string& cookies);
 
-/// \brief HTTP-сессия: переиспользуемые настройки и выполнение GET/POST.
+/// \brief HTTP-сессия: хранит общие для запросов настройки и выполняет GET/POST.
 ///
-/// По умолчанию: User-Agent сканера, SSL-проверка отключена, редиректы
-/// разрешены, таймаут 15 с (как в Python-версии).
-class HttpSession {
+/// Повторяет поведение build_session из исходного Python-инструмента:
+/// задаёт User-Agent, пользовательские заголовки, cookie, прокси и
+/// отключение проверки TLS-сертификата (для тестирования через прокси).
+class Session {
  public:
-  /// \brief Создаёт сессию с настройками по умолчанию.
-  HttpSession();
+  /// \brief Создаёт сессию с браузерным User-Agent и отключённой проверкой TLS.
+  Session();
 
-  /// \brief Устанавливает User-Agent.
-  /// \param ua Строка User-Agent.
+  /// \brief Устанавливает строку User-Agent.
+  /// \param ua Значение заголовка User-Agent.
   void set_user_agent(const std::string& ua);
+
+  /// \brief Добавляет/перезаписывает заголовок.
+  /// \param name Имя заголовка.
+  /// \param value Значение заголовка.
+  void add_header(const std::string& name, const std::string& value);
 
   /// \brief Добавляет заголовок из строки "Name: value".
   /// \param line Строка заголовка.
-  void add_header(const std::string& line);
+  void add_header_line(const std::string& line);
 
-  /// \brief Устанавливает cookie из строки "a=1; b=2".
-  /// \param cookie_string Строка cookie.
-  void set_cookies(const std::string& cookie_string);
+  /// \brief Задаёт cookie из строки "k=v; k2=v2".
+  /// \param cookie_str Строка cookie.
+  void set_cookies(const std::string& cookie_str);
 
-  /// \brief Устанавливает HTTP-прокси для http и https.
-  /// \param proxy_url URL прокси, например "http://127.0.0.1:8080".
-  void set_proxy(const std::string& proxy_url);
+  /// \brief Задаёт HTTP/HTTPS прокси.
+  /// \param proxy URL прокси, например "http://127.0.0.1:8080".
+  void set_proxy(const std::string& proxy);
 
-  /// \brief Включает или отключает проверку SSL-сертификата.
+  /// \brief Задаёт таймаут запроса в миллисекундах.
+  /// \param ms Таймаут, мс.
+  void set_timeout_ms(long ms);
+
+  /// \brief Включает/выключает проверку TLS-сертификата.
   /// \param verify true — проверять сертификат.
   void set_verify_ssl(bool verify);
 
-  /// \brief Устанавливает таймаут запроса в секундах.
-  /// \param seconds Таймаут (> 0).
-  void set_timeout(int seconds);
-
-  /// \brief Выполняет GET-запрос.
+  /// \brief Выполняет GET-запрос с текущими настройками сессии.
   /// \param url Целевой URL.
   /// \return Ответ сервера.
-  /// \throws std::runtime_error при сетевой ошибке cpr/curl.
-  HttpResponse get(const std::string& url);
+  /// \throws std::runtime_error при транспортной ошибке (DNS, соединение, таймаут).
+  HttpResponse get(const std::string& url) const;
 
-  /// \brief Выполняет POST с form-urlencoded телом.
-  /// \param url Целевой URL (обычно без query string).
-  /// \param form Пары ключ-значение для тела запроса.
+  /// \brief Выполняет POST-запрос с телом из переданных пар (form-urlencoded).
+  /// \param url Целевой URL (без query, либо query игнорируется телом).
+  /// \param form Пары ключ-значение тела запроса.
   /// \return Ответ сервера.
-  /// \throws std::runtime_error при сетевой ошибке cpr/curl.
-  HttpResponse post(const std::string& url, const QueryParams& form);
-
-  /// \brief Возвращает текущий User-Agent сессии.
-  /// \return Строка User-Agent.
-  const std::string& user_agent() const;
-
-  /// \brief Возвращает настроенные дополнительные заголовки.
-  /// \return Список пар имя-значение.
-  const std::vector<std::pair<std::string, std::string>>& headers() const;
-
-  /// \brief Возвращает настроенные cookie.
-  /// \return Список пар имя-значение.
-  const std::vector<std::pair<std::string, std::string>>& cookies() const;
-
-  /// \brief Возвращает URL прокси (пустая строка, если не задан).
-  /// \return URL прокси.
-  const std::string& proxy() const;
-
-  /// \brief Возвращает флаг проверки SSL.
-  /// \return true, если проверка включена.
-  bool verify_ssl() const;
-
-  /// \brief Возвращает таймаут запроса в секундах.
-  /// \return Таймаут в секундах.
-  int timeout_sec() const;
+  /// \throws std::runtime_error при транспортной ошибке.
+  HttpResponse post(const std::string& url, const QueryParams& form) const;
 
  private:
-  std::string user_agent_;
   std::vector<std::pair<std::string, std::string>> headers_;
   std::vector<std::pair<std::string, std::string>> cookies_;
+  std::string user_agent_;
   std::string proxy_;
+  long timeout_ms_ = 15000;
   bool verify_ssl_ = false;
-  int timeout_sec_ = kDefaultTimeoutSec;
 };
-
-/// \brief Создаёт сессию из списка заголовков, cookie и прокси (как build_session в Python).
-/// \param headers Список строк "Name: value" (может быть пустым).
-/// \param cookie_string Строка cookie или пустая.
-/// \param proxy URL прокси или пустая строка.
-/// \return Настроенная \ref HttpSession.
-HttpSession build_session(const std::vector<std::string>& headers,
-                          const std::string& cookie_string,
-                          const std::string& proxy);
 
 }  // namespace his
