@@ -112,14 +112,17 @@ void Session::set_timeout_ms(long ms) { timeout_ms_ = ms; }
 void Session::set_verify_ssl(bool verify) { verify_ssl_ = verify; }
 
 HttpResponse Session::get(const std::string& url) const {
-  cpr::Session session;
+  // Reuse one cpr::Session per thread so libcurl keeps the TCP/TLS connection
+  // alive across the many sequential probes to the same host. A separate handle
+  // is used per thread, which keeps parallel scanning thread-safe.
+  thread_local cpr::Session session;
   configure_session(session, url, user_agent_, headers_, cookies_, proxy_, timeout_ms_,
                     verify_ssl_);
   return to_response(session.Get());
 }
 
 HttpResponse Session::post(const std::string& url, const QueryParams& form) const {
-  cpr::Session session;
+  thread_local cpr::Session session;
   configure_session(session, url, user_agent_, headers_, cookies_, proxy_, timeout_ms_,
                     verify_ssl_);
   cpr::Payload payload{};
